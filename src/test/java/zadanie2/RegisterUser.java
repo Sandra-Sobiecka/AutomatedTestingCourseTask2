@@ -10,25 +10,29 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class RegisterUser {
     private WebDriver driver;
+    private WebDriverWait wait;
     @Given("^an open https://tester\\.codersguru\\.pl website$")
     public void anOpenCodersguruWebsite() {
         System.setProperty("webdriver.gecko.driver",
-                "src/test/resources/geckodriver.exe");
+                "src/test/resources/geckodriver");
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.get("https://tester.codersguru.pl/");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/section[3]/div/form/input[2]")));
 
 
     }
 
     @When("^click zaloz konto$")
     public void clickZalozKonto() {
-        WebElement registration = driver.findElement(By.xpath("/html/body/section[3]/div/form/input[1]"));
+        WebElement registration = driver.findElement(By.xpath("/html/body/section[3]/div/form/input[2]"));
         registration.click();
 
     }
